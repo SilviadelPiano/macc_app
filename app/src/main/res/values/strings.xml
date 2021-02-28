@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Senators</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_home">HomeActivity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -13,4 +12,10 @@
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
+
+
+    <!-- Costanti -->
+    <string name="user">USER</string>
+    <string name="user_token">USER_TOKEN</string>
+
 </resources>
