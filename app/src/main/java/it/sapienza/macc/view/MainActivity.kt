@@ -36,14 +36,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         //initNavDrawer()
-        performAuth()
+        //performAuth()
+
     }
 
     private fun performAuth() {
-        //val clientId = BuildConfig.;
-
-        val clientId = "611684968350-03qd6su7efs3buar5fhm0d19fr9rjo07.apps.googleusercontent.com"
-
+        val clientId = BuildConfig.CLIENT_ID
+        //val clientId = "xxx"
 
         val request = GetSignInIntentRequest.builder()
             .setServerClientId(clientId)
