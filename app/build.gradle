@@ -7,7 +7,14 @@ def maccPropertiesFile = rootProject.file("macc.properties")
 def maccProperties = new Properties()
 maccProperties.load(new FileInputStream(maccPropertiesFile))
 
+apply plugin: 'kotlin-android-extensions'
+
 android {
+
+    androidExtensions {
+        experimental = true
+    }
+
     compileSdkVersion 30
     buildToolsVersion "30.0.2"
 
@@ -17,8 +24,9 @@ android {
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField "String", "CLIENT_ID", maccProperties['CLIENT_ID']
+
     }
 
     buildTypes {
