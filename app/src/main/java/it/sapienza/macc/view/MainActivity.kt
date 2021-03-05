@@ -35,14 +35,16 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        //initNavDrawer()
-        //performAuth()
+        initNavDrawer()
+        // performAuth()
 
     }
 
+    /*
+
     private fun performAuth() {
-        val clientId = BuildConfig.CLIENT_ID
-        //val clientId = "xxx"
+        //val clientId = BuildConfig.CLIENT_ID
+        val clientId = "611684968350-03qd6su7efs3buar5fhm0d19fr9rjo07.apps.googleusercontent.com"
 
         val request = GetSignInIntentRequest.builder()
             .setServerClientId(clientId)
@@ -61,25 +63,6 @@ class MainActivity : AppCompatActivity() {
                 null)
         }
         intent.addOnFailureListener { e-> Log.e("Error", "An error occurred") }
-    }
-
-    private fun initNavDrawer() {
-        navigationController = Navigation.findNavController(findViewById(R.id.fragment))
-        drawerLayout = findViewById(R.id.drawer_layout)
-        appBarConfiguration = AppBarConfiguration(navigationController.graph, drawerLayout)
-        navigationView = findViewById(R.id.navigationView)
-
-        val headerView: View = navigationView.inflateHeaderView(R.layout.drawer_header)
-        // val headerImage: CircularImageView = headerView.findViewById(R.id.circularImageId)
-        val headerName: TextView = headerView.findViewById(R.id.headerName)
-        headerName.setText(R.string.app_name)
-        navigationView.setupWithNavController(navigationController)
-        setupActionBarWithNavController(navigationController, appBarConfiguration)
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.fragment)
-        return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
 
@@ -108,6 +91,25 @@ class MainActivity : AppCompatActivity() {
             initNavDrawer()
         }
     }
+    */
 
+    private fun initNavDrawer() {
+        navigationController = Navigation.findNavController(findViewById(R.id.fragment))
+        drawerLayout = findViewById(R.id.drawer_layout)
+        appBarConfiguration = AppBarConfiguration(navigationController.graph, drawerLayout)
+        navigationView = findViewById(R.id.navigationView)
+
+        val headerView: View = navigationView.inflateHeaderView(R.layout.drawer_header)
+        // val headerImage: CircularImageView = headerView.findViewById(R.id.circularImageId)
+        val headerName: TextView = headerView.findViewById(R.id.headerName)
+        headerName.setText("Topolino")
+        navigationView.setupWithNavController(navigationController)
+        setupActionBarWithNavController(navigationController, appBarConfiguration)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        val navController = findNavController(R.id.fragment)
+        return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+    }
 
 }

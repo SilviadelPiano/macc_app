@@ -5,12 +5,12 @@ class Model private constructor() {
     init {
     }
 
-    private object GetInstance {
+    private object getInstance {
         val INSTANCE = Model()
     }
 
     companion object {
-        val instance: Model by lazy { GetInstance.INSTANCE }
+        val instance: Model by lazy { getInstance.INSTANCE }
     }
 
     private var beansMap = hashMapOf<String, Any?>()
