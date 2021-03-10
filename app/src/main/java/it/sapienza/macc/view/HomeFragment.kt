@@ -17,6 +17,7 @@ import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import it.sapienza.macc.BuildConfig
 import it.sapienza.macc.R
+import it.sapienza.macc.utils.LoginService
 import it.sapienza.macc.model.Model
 import it.sapienza.macc.model.Senator
 import kotlinx.android.synthetic.main.drawer_header.*
@@ -32,9 +33,6 @@ class HomeFragment : Fragment(), View.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if (loginBtn === null) {
-            Log.e("error", "BUTTON NOT DEFINED!")
-        }
 
         loginBtn.setOnClickListener(this)
     }
@@ -50,7 +48,6 @@ class HomeFragment : Fragment(), View.OnClickListener {
                 val id = credential.id
                 val picUri = credential.profilePictureUri
                 Log.i("info", "onActivityResult: " + name + " - " + familyName + " - " + id)
-
                 // TODO
                 val senator = Senator(name, familyName, id, "Senator", picUri)
                 Model.instance.putBean(getString(R.string.user), senator)
@@ -58,21 +55,22 @@ class HomeFragment : Fragment(), View.OnClickListener {
                 // Store user details into shared preferences
                 val sharedPref = this.activity?.getPreferences(Context.MODE_PRIVATE) ?: return
                 with(sharedPref.edit()) {
-                    putString(getString(R.string.user_token), token)
+                    putString(getString(R.string.user_token), token.toString())
                     apply()
                 }
+                var lservice = LoginService(context)
+                lservice.sendLoginRequest(id, token.toString())
                 updateView()
             } catch (e: ApiException) {
-                Log.e("AUTH", e.message + "-- trace --" + e.stackTrace)
-                // The ApiException status code indicates the detailed failure reason.
+                Log.e("AUTH", e.message + "-- trace --" + e.stackTrace.toString())
+                e.printStackTrace()
             }
         }
     }
 
     override fun onClick(v: View?) {
         val clientId = BuildConfig.CLIENT_ID
-        //val clientId = "xxx"
-
+        //val clientId = "x"
         val request = GetSignInIntentRequest.builder()
                 .setServerClientId(clientId)
                 .build()
