@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.android.gms.auth.api.identity.GetSignInIntentRequest
 import com.google.android.gms.auth.api.identity.Identity
@@ -49,7 +50,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
                 val picUri = credential.profilePictureUri
                 Log.i("info", "onActivityResult: " + name + " - " + familyName + " - " + id)
                 // TODO
-                val senator = Senator(name, familyName, id, "Senator", picUri)
+                val senator = Senator(name, familyName, id, "", picUri)
                 Model.instance.putBean(getString(R.string.user), senator)
 
                 // Store user details into shared preferences
@@ -58,11 +59,12 @@ class HomeFragment : Fragment(), View.OnClickListener {
                     putString(getString(R.string.user_token), token.toString())
                     apply()
                 }
-                var lservice = LoginService(context)
+                var lservice = LoginService(context, this)
                 lservice.sendLoginRequest(id, token.toString())
                 updateView()
             } catch (e: ApiException) {
-                Log.e("AUTH", e.message + "-- trace --" + e.stackTrace.toString())
+                Toast.makeText(context, "An error occurred", Toast.LENGTH_SHORT)
+                Log.e("AUTH", e.message.toString())
                 e.printStackTrace()
             }
         }
@@ -90,11 +92,11 @@ class HomeFragment : Fragment(), View.OnClickListener {
         intent.addOnFailureListener { e-> Log.e("Error", "An error occurred") }
     }
 
-    private fun updateView() {
+    fun updateView() {
         val senator: Senator = Model.instance.getBean("USER") as Senator
         welcomeTextView.setText("Welcome, " + senator.name)
-        activity?.headerRole?.setText(senator.name)
-        activity?.headerName?.setText(senator.role)
+        activity?.headerRole?.setText(senator.role)
+        activity?.headerName?.setText(senator.name)
         Picasso.get().load(senator.profilePictureUri).error(R.drawable.person).fit()
                 .centerInside().into(activity?.circularImageId);
     }
