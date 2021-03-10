@@ -26,6 +26,9 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField "String", "CLIENT_ID", maccProperties['CLIENT_ID']
+        buildConfigField "String", "BE_URI", maccProperties['BE_URI']
+        buildConfigField "Integer", "BE_PORT", maccProperties['BE_PORT']
+        manifestPlaceholders = [usesCleartextTraffic:"true"]
 
     }
 
@@ -58,6 +61,7 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui:2.2.2'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
+    implementation 'com.android.volley:volley:1.1.1'
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
